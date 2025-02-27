@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21314995214",
+    "project_id": "laviohanaprojectguitarapp",
+    "storage_bucket": "laviohanaprojectguitarapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21314995214:android:00e32a54c4bc30ee13e85f",
+        "android_client_info": {
+          "package_name": "com.companyname.laviohanaprojectguitarapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHuIkrnABHTF6JTQS3chlcF9bwhu30uUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
