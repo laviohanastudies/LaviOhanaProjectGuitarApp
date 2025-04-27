@@ -79,7 +79,9 @@ namespace LaviOhanaProjectGuitarApp.Activities
                 etRegisterEmail.Text = string.Empty;
                 etRegisterPass.Text = string.Empty;
                 etRegisterLevel.Text = string.Empty;
-                
+                Intent intent = new Intent(this, typeof(OptionsActivity));
+                intent.PutExtra("uid", uid);
+                StartActivity(intent);
             }
             else
             {

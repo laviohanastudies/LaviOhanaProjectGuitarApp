@@ -60,11 +60,15 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\OptionsActivity.cs" />
     <Compile Include="Activities\ProfileActivity.cs" />
+    <Compile Include="Activities\SongListActivity.cs" />
+    <Compile Include="Activities\SongProfileActivity.cs" />
     <Compile Include="Activities\UploadSongActivity.cs" />
     <Compile Include="Activities\UserListActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
+    <Compile Include="Helpers\SongAdapter.cs" />
     <Compile Include="Helpers\UserAdapter.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="MainActivity.cs" />
@@ -74,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="google-services.json" />
+    <None Include="google-services %282%29.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -145,7 +149,27 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\UploadSong_Layout.xml">
+    <AndroidResource Include="Resources\layout\UploadSongLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SongListRowLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SongListLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SongProfileLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\OptionsLayout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

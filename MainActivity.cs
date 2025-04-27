@@ -46,8 +46,10 @@ namespace LaviOhanaProjectGuitarApp
 
         private void LoginButton_Click(object sender, System.EventArgs e)
         {
-            //Intent intent = new Intent(this, typeof(LoginActivity));
-            Intent intent = new Intent(this, typeof(UploadSongActivity));
+           Intent intent = new Intent(this, typeof(LoginActivity));
+            //Intent intent = new Intent(this, typeof(UploadSongActivity));
+           // Intent intent = new Intent(this, typeof(SongListActivity));
+
             StartActivity(intent);
         }
 

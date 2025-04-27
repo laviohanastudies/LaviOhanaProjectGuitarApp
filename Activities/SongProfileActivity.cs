@@ -1,0 +1,98 @@
+﻿using Android.App;
+using Android.Content;
+using Android.Gms.Extensions;
+using Android.Gms.Tasks;
+using Android.OS;
+using Android.Runtime;
+using Android.Views;
+using Android.Widget;
+using Firebase.Firestore;
+using LaviOhanaProjectGuitarApp.Helpers;
+using LaviOhanaProjectGuitarApp.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LaviOhanaProjectGuitarApp.Activities
+{
+    [Activity(Label = "SongProfileActivity")]
+    public class SongProfileActivity : Activity, IOnSuccessListener
+    {
+        TextView tvSongName, tvSongPerformer, tvSongLevel;
+        FireBaseData fbd;
+        string uid;
+        RegisterUser user;
+        Song song;
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.SongProfileLayout);
+            uid = Intent.GetStringExtra("uid");
+            InitObject();
+            InitViews();
+            GetProfile();
+        }
+
+        private async void GetProfile()
+        {
+            await fbd.GetCollection(General.FS_SONG_COLLECTION, uid).AddOnSuccessListener(this);
+        }
+
+        private void InitViews()
+        {
+            tvSongName = FindViewById<TextView>(Resource.Id.tvSongName);
+            tvSongPerformer = FindViewById<TextView>(Resource.Id.tvSongPerformer);
+            tvSongLevel = FindViewById<TextView>(Resource.Id.tvSongLevel);
+            
+        }
+
+        //private async void ProfileUpdateButton_ClickAsync(object sender, EventArgs e)
+        //{
+        //    if (await UpdateUsername(etProfileUsername.Text))
+        //    {
+        //        Toast.MakeText(this, "Updated", ToastLength.Short).Show();
+        //    }
+        //    else
+        //    {
+        //        Toast.MakeText(this, "Faild", ToastLength.Short).Show();
+        //    }
+        //}
+
+        //private async Task<bool> UpdateUsername(string UserName)
+        //{
+        //    try
+        //    {
+        //        DocumentReference UserReference = fbd.firestore.Collection(General.FS_UsersCollection).Document(uid);
+        //        await UserReference.Update(General.KEY_USERNAME, UserName);
+        //    }
+        //    catch { return false; }
+        //    return true;
+        //}
+
+        private void InitObject()
+        {
+            fbd = new FireBaseData();
+        }
+
+        public void OnSuccess(Java.Lang.Object result)
+        {
+
+            //public RegisterUser(string Id, string Username, string Mail, string Password, string Level)
+            var snapshot = (DocumentSnapshot)result;
+            //user = new RegisterUser(snapshot.Id, snapshot.Get("Username").ToString(), snapshot.Get("Email").ToString(), snapshot.Get("Password").ToString(), snapshot.Get("Level").ToString());
+            song = new Song(snapshot.Id, snapshot.Get("Name").ToString(), snapshot.Get("Performer").ToString(), snapshot.Get("Level").ToString(), snapshot.Get("ImageTab").ToString());
+
+            PrintSong(song);
+        }
+
+        private void PrintSong(Song song)
+        {
+            tvSongName.Text = song.Name;
+            tvSongPerformer.Text = song.Performer;
+            tvSongLevel.Text = song.Level;
+        }
+    }
+}

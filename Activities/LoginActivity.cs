@@ -32,7 +32,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
                     Toast.MakeText(this, "Logged In Successfully", ToastLength.Short).Show();
                     etEmail.Text = "";
                     etPass.Text = "";
-                    Intent intent = new Intent(this, typeof(ProfileActivity));
+                    Intent intent = new Intent(this, typeof(OptionsActivity));
                     intent.PutExtra("uid", uid);
                     StartActivity(intent);
                 }

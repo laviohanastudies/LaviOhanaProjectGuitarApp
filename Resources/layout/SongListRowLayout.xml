@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Name: "
+        android:textSize="35px"
+        android:textColor="@android:color/holo_green_dark"
+        android:padding="30px"
+        android:id="@+id/tvSongListRowName"
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text = "Performer: "
+            android:textSize="35px"
+            android:textColor="@android:color/holo_green_dark"
+            android:padding="30px"
+            android:id="@+id/tvSongListRowPerformer"
+        />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text = "Level: "
+            android:textSize="35px"
+            android:textColor="@android:color/holo_green_dark"
+            android:padding="30px"
+            android:id="@+id/tvSongListRowLevel"
+        />
+    </LinearLayout>
+</LinearLayout>

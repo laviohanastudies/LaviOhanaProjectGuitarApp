@@ -34,7 +34,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.UploadSong_Layout);
+            SetContentView(Resource.Layout.UploadSongLayout);
             InitObject();
             // Create your application here
             InitViews();
