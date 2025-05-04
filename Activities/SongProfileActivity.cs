@@ -22,23 +22,24 @@ namespace LaviOhanaProjectGuitarApp.Activities
     {
         TextView tvSongName, tvSongPerformer, tvSongLevel;
         FireBaseData fbd;
-        string uid;
-        RegisterUser user;
+        string sid;
         Song song;
+        Android.Content.ISharedPreferences sp;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SongProfileLayout);
-            uid = Intent.GetStringExtra("uid");
+            //sid = Intent.GetStringExtra("sid");
             InitObject();
+            GetDataFromSp();
             InitViews();
             GetProfile();
         }
 
         private async void GetProfile()
         {
-            await fbd.GetCollection(General.FS_SONG_COLLECTION, uid).AddOnSuccessListener(this);
+            await fbd.GetCollection(General.FS_SONG_COLLECTION, sid).AddOnSuccessListener(this);
         }
 
         private void InitViews()
@@ -75,16 +76,18 @@ namespace LaviOhanaProjectGuitarApp.Activities
         private void InitObject()
         {
             fbd = new FireBaseData();
+            song = new Song();
+            sp = this.GetSharedPreferences("details", Android.Content.FileCreationMode.Private);
+        }
+        public void GetDataFromSp()
+        {
+            sid = sp.GetString("sid", null);
         }
 
         public void OnSuccess(Java.Lang.Object result)
         {
-
-            //public RegisterUser(string Id, string Username, string Mail, string Password, string Level)
             var snapshot = (DocumentSnapshot)result;
-            //user = new RegisterUser(snapshot.Id, snapshot.Get("Username").ToString(), snapshot.Get("Email").ToString(), snapshot.Get("Password").ToString(), snapshot.Get("Level").ToString());
-            song = new Song(snapshot.Id, snapshot.Get("Name").ToString(), snapshot.Get("Performer").ToString(), snapshot.Get("Level").ToString(), snapshot.Get("ImageTab").ToString());
-
+            song = new Song(snapshot.Id, snapshot.Get("Name").ToString(), snapshot.Get("Performer").ToString(), snapshot.Get("Level").ToString());
             PrintSong(song);
         }
 

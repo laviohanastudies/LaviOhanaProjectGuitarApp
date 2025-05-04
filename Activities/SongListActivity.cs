@@ -25,6 +25,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
         SongAdapter sa;
         Button btnSongListBack;
         FireBaseData fbd;
+        Android.Content.ISharedPreferences sp;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -53,11 +54,10 @@ namespace LaviOhanaProjectGuitarApp.Activities
         //}
         private void InitObjects()
         {
-
             //    Toast.MakeText(this, "ok", ToastLength.Long).Show();
-
             fbd = new FireBaseData();
             fbd.AddCollectionSnapShotListener(this, General.FS_SONG_COLLECTION);
+            sp = this.GetSharedPreferences("details", Android.Content.FileCreationMode.Private);
 
         }
 
@@ -74,14 +74,21 @@ namespace LaviOhanaProjectGuitarApp.Activities
         private void lvSongList_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
             Song song = lstSongs[e.Position];
-            Toast.MakeText(this, song.Id + "delete", ToastLength.Long).Show();
-
         }
 
         private void lvSongList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Song song = lstSongs[e.Position];
-            Toast.MakeText(this, song.Id + "update", ToastLength.Long).Show();
+            PutSp(song);
+            Intent intent = new Intent(this, typeof(SongProfileActivity));
+            Intent.PutExtra("sid", song.Id);
+            StartActivity(intent);
+        }
+        public void PutSp(Song song)
+        {
+            var editor = sp.Edit();
+            editor.PutString("sid", song.Id);
+            editor.Commit();
         }
 
         //public async void OnClick(View v)

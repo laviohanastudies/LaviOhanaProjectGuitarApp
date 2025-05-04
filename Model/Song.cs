@@ -27,6 +27,14 @@ namespace LaviOhanaProjectGuitarApp.Model
             Level = level;
             ImageTab = imageTab;
         }
+        public Song(string id, string name, string performer, string level)
+        {
+            Id = id;
+            Name = name;
+            Performer = performer;
+            Level = level;
+            ImageTab = string.Empty;
+        }
         public Song()
         {
             Id = string.Empty;

@@ -14,13 +14,15 @@ namespace LaviOhanaProjectGuitarApp.Activities
     [Activity(Label = "OptionsActivity")]
     public class OptionsActivity : Activity, View.IOnClickListener
     {
-        Button btnOptionsSearch, btnOptionsUploadSong, btnOptionsSongList;
+        Button btnOptionsSearch, btnOptionsUploadSong, btnOptionsSongList, btnOptionsProfile;
+        string uid;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.activity_main);
+            SetContentView(Resource.Layout.OptionsLayout);
+            uid = Intent.GetStringExtra("uid");
             IniteViews();
         }
 
@@ -32,25 +34,15 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
             btnOptionsSongList = FindViewById<Button>(Resource.Id.btnOptionsSongList);
 
+            btnOptionsProfile = FindViewById<Button>(Resource.Id.btnOptionsProfile);
+
+
             btnOptionsSearch.SetOnClickListener(this);
             btnOptionsUploadSong.SetOnClickListener(this);
             btnOptionsSongList.SetOnClickListener(this);
+            btnOptionsProfile.SetOnClickListener(this);
 
-        }
 
-        private void RegisterButton_Click(object sender, System.EventArgs e)
-        {
-            Intent intent = new Intent(this, typeof(RegisterActivity));
-            StartActivity(intent);
-        }
-
-        private void LoginButton_Click(object sender, System.EventArgs e)
-        {
-            Intent intent = new Intent(this, typeof(LoginActivity));
-            //Intent intent = new Intent(this, typeof(UploadSongActivity));
-            // Intent intent = new Intent(this, typeof(SongListActivity));
-
-            StartActivity(intent);
         }
 
         public void OnClick(View v)
@@ -65,9 +57,15 @@ namespace LaviOhanaProjectGuitarApp.Activities
                 Intent intent = new Intent(this, typeof(UploadSongActivity));
                 StartActivity(intent);
             }
-            else
+            else if (v == btnOptionsSongList)
             {
                 Intent intent = new Intent(this, typeof(SongListActivity));
+                StartActivity(intent);
+            }
+            else
+            {
+                Intent intent = new Intent(this, typeof(ProfileActivity));
+                intent.PutExtra("uid", uid);
                 StartActivity(intent);
             }
         }

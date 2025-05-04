@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 namespace LaviOhanaProjectGuitarApp.Activities
 {
     [Activity(Label = "UploadSong_Activity")]
-    public class UploadSongActivity : Activity
+    public class UploadSongActivity : Activity ,Android.Views.View.IOnClickListener
     {
         EditText etUploadSongName, etUploadSongPerformer, etUploadSongLevel;
         ImageView ivUploadSongImageTab;
@@ -54,8 +54,10 @@ namespace LaviOhanaProjectGuitarApp.Activities
             ivUploadSongImageTab = FindViewById<ImageView>(Resource.Id.ivUploadSongImageTab);
             btnUploadSongImageTab = FindViewById<Button>(Resource.Id.btnUploadSongImageTab);
             btnUploadSong = FindViewById<Button>(Resource.Id.btnUploadSong);
-            btnUploadSongImageTab.Click += btnUploadSongImageTab_Click;
-            btnUploadSong.Click += btnUploadSong_Click;
+            btnUploadSongImageTab.SetOnClickListener(this);
+            btnUploadSong.SetOnClickListener(this);
+            //btnUploadSongImageTab.Click += btnUploadSongImageTab_Click;
+            //btnUploadSong.Click += btnUploadSong_Click;
         }
 
         private void btnUploadSongImageTab_Click(object sender, EventArgs e)
@@ -71,13 +73,11 @@ namespace LaviOhanaProjectGuitarApp.Activities
             {
                 if (resultCode == Result.Ok)
                 {
-
                     System.IO.Stream stream = ContentResolver.OpenInputStream(data.Data);
                     bitmap = BitmapFactory.DecodeStream(stream);
                     ivUploadSongImageTab.SetImageBitmap(bitmap);
                     image = General.ConvertImageToBase64(bitmap);
                 }
-
             }
         }
 
@@ -128,6 +128,21 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
             }
             return true;
+        }
+
+        public void OnClick(View v)
+        {
+            if(v==btnUploadSongImageTab)
+            {
+                Intent = new Intent(Intent.ActionPick, MediaStore.Images.Media.InternalContentUri);
+                Intent.SetType("image/*");
+                StartActivityForResult(Intent.CreateChooser(Intent, "SelectPicture"), 0);
+                SaveDocument();
+            }
+            if(v==btnUploadSong)
+            {
+                SaveDocument();
+            }
         }
     }
 }

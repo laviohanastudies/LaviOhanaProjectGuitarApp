@@ -18,7 +18,6 @@ namespace LaviOhanaProjectGuitarApp.Helpers
 {
     internal class FireBaseData
 	{
-        ///ygyug
         public readonly FirebaseAuth auth;
         public readonly FirebaseApp app;
         public FirebaseFirestore firestore;
