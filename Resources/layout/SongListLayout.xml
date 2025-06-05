@@ -13,15 +13,10 @@
         android:gravity="center"
         android:textFontWeight="1500"
     />
-   <ListView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvSongList"/>
-         <!--
-        android:textSize = "50px"
-        android:background="@android:color/white"
-        
-        android:paddingLeft="5px"
-        android:layout_marginTop="5px"
-    />-->
+        android:id="@+id/lvSongList"
+    />
+         
 </LinearLayout>
