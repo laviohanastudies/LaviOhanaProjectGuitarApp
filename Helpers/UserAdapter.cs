@@ -13,18 +13,18 @@ using System.Text;
 
 namespace LaviOhanaProjectGuitarApp.Helpers
 {
-    internal class UserAdapter : BaseAdapter<RegisterUser>
+    internal class UserAdapter : BaseAdapter<User>
     {
 
         Context context;
-        private List<RegisterUser> UserList;
+        private List<User> UserList;
 
         public UserAdapter(Context context)
         {
             this.context = context;
         }
 
-        public UserAdapter(Context context, List<RegisterUser> UserList)
+        public UserAdapter(Context context, List<User> UserList)
         {
             this.UserList = UserList;
             this.context = context;
@@ -42,21 +42,21 @@ namespace LaviOhanaProjectGuitarApp.Helpers
 
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
-            LayoutInflater LayoutInflater;
-            LayoutInflater = ((UserListActivity)context).LayoutInflater;
-            View view = LayoutInflater.Inflate(Resource.Layout.UserListRowLayout, parent, false);
-            
-            TextView UserListRowName = view.FindViewById<TextView>(Resource.Id.UserListRowNameTv);
-            TextView UserListRowEmail = view.FindViewById<TextView>(Resource.Id.UserListRowEmailTv);
-            TextView UserListRowPassword = view.FindViewById<TextView>(Resource.Id.UserListRowPasswordTv);
-            RegisterUser user = UserList[position];
-            if (user != null)
-            {
-                UserListRowName.Text = UserListRowName.Text + user.Userame;
-                UserListRowEmail.Text = UserListRowEmail.Text + user.Email;
-                UserListRowPassword.Text = UserListRowPassword.Text + user.Password;
-            }
-            return view;
+            //LayoutInflater LayoutInflater;
+            //LayoutInflater = ((UserListActivity)context).LayoutInflater;
+            //View view = LayoutInflater.Inflate(Resource.Layout.UserListRowLayout, parent, false);
+
+            //TextView UserListRowName = view.FindViewById<TextView>(Resource.Id.UserListRowNameTv);
+            //TextView UserListRowEmail = view.FindViewById<TextView>(Resource.Id.UserListRowEmailTv);
+            //TextView UserListRowPassword = view.FindViewById<TextView>(Resource.Id.UserListRowPasswordTv);
+            //RegisterUser user = UserList[position];
+            //if (user != null)
+            //{
+            //    UserListRowName.Text = UserListRowName.Text + user.Userame;
+            //    UserListRowEmail.Text = UserListRowEmail.Text + user.Email;
+            //    UserListRowPassword.Text = UserListRowPassword.Text + user.Password;
+            //}
+            return null;
         }
 
         //Fill in cound here, currently 0
@@ -68,7 +68,7 @@ namespace LaviOhanaProjectGuitarApp.Helpers
             }
         }
 
-        public override RegisterUser this[int position]
+        public override User this[int position]
         {
             get
             {

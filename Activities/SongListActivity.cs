@@ -41,7 +41,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
             GetSongListAsync();
         }
 
-        private async System.Threading.Tasks.Task GetSongListAsync()
+        private async void GetSongListAsync()
         {
             await fbd.GetCollection(General.FS_SONG_COLLECTION).AddOnCompleteListener(this);
         }
@@ -67,13 +67,13 @@ namespace LaviOhanaProjectGuitarApp.Activities
             //  Toast.MakeText(this, uid, ToastLength.Long).Show();
             lvSongList = FindViewById<ListView>(Resource.Id.lvSongList);
             lvSongList.ItemClick += lvSongList_ItemClick;
-            lvSongList.ItemLongClick += lvSongList_ItemLongClick;
+            //lvSongList.ItemLongClick += lvSongList_ItemLongClick;
 
         }
 
         private void lvSongList_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
-            Song song = lstSongs[e.Position];
+            //Song song = lstSongs[e.Position];
         }
 
         private void lvSongList_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -135,11 +135,11 @@ namespace LaviOhanaProjectGuitarApp.Activities
                     Name = item.Get(General.KEY_SONG_NAME).ToString(),
                     Performer = item.Get(General.KEY_PERFORMER).ToString(),
                     Level = item.Get(General.KEY_LEVEL).ToString(),
-                    // ImageUrl = item.Get(General.KEY_URL).ToString(),//**
+                    ImageTab = string.Empty,
                 };
                 lstSongs.Add(song);
             }
-            sa = new SongAdapter(this, lstSongs);
+            sa = new SongAdapter(this, lstSongs, 1);
             lvSongList.Adapter = sa;
             return lstSongs;
         }

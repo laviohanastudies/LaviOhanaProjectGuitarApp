@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase.Firestore.Auth;
 using LaviOhanaProjectGuitarApp.Helpers;
 using System;
 using System.Collections.Generic;
@@ -17,21 +18,59 @@ namespace LaviOhanaProjectGuitarApp.Activities
     [Activity(Label = "LoginActivity")]
     public class LoginActivity : Activity, View.IOnClickListener
     {
-        EditText etEmail, etPass;
-        TextView tvDisplay;
-        Button LoginBtn;
+        EditText etEmail, etPassword;
+        Button LoginBtn, btnTogglePassword;
         FireBaseData fbd;
         string uid;
+        bool isPasswordVisible = false;
+
+        protected override void OnCreate(Bundle savedInstanceState)
+        {
+            base.OnCreate(savedInstanceState);
+            SetContentView(Resource.Layout.LoginLayout);
+
+            fbd = new FireBaseData();
+            InitViews();
+        }
+
+        private void InitViews()
+        {
+            etEmail = FindViewById<EditText>(Resource.Id.etEmail);
+            etPassword = FindViewById<EditText>(Resource.Id.etPassword);
+            LoginBtn = FindViewById<Button>(Resource.Id.LoginBtn);
+            btnTogglePassword = FindViewById<Button>(Resource.Id.btnTogglePassword);
+
+            LoginBtn.SetOnClickListener(this);
+            btnTogglePassword.Click += BtnTogglePassword_Click;
+        }
+
+        private void BtnTogglePassword_Click(object sender, EventArgs e)
+        {
+            if (isPasswordVisible)
+            {
+                etPassword.InputType = Android.Text.InputTypes.ClassText | Android.Text.InputTypes.TextVariationPassword;
+                btnTogglePassword.Text = "Show";
+                isPasswordVisible = false;
+            }
+            else
+            {
+                etPassword.InputType = Android.Text.InputTypes.ClassText | Android.Text.InputTypes.TextVariationVisiblePassword;
+                btnTogglePassword.Text = "Hide";
+                isPasswordVisible = true;
+            }
+            etPassword.SetSelection(etPassword.Text.Length);
+        }
+
 
         public async void OnClick(View v)
         {
             if (v == LoginBtn)
             {
-                if (await Login(etEmail.Text, etPass.Text))
+                if (await Login(etEmail.Text, etPassword.Text))
                 {
                     Toast.MakeText(this, "Logged In Successfully", ToastLength.Short).Show();
                     etEmail.Text = "";
-                    etPass.Text = "";
+                    etPassword.Text = "";
                     Intent intent = new Intent(this, typeof(OptionsActivity));
                     intent.PutExtra("uid", uid);
                     StartActivity(intent);
@@ -56,25 +95,6 @@ namespace LaviOhanaProjectGuitarApp.Activities
                 return false;
             }
             return true;
-        }
-
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            // Create your application here
-            SetContentView(Resource.Layout.LoginLayout);
-            fbd = new FireBaseData();
-            IniteViews();
-        }
-
-        private void IniteViews()
-        {
-            etEmail = FindViewById<EditText>(Resource.Id.etEmail);
-            etPass = FindViewById<EditText>(Resource.Id.etPass);
-            tvDisplay = FindViewById<TextView>(Resource.Id.tvDisplay);
-            LoginBtn = FindViewById<Button>(Resource.Id.LoginBtn);
-            LoginBtn.SetOnClickListener(this);
         }
     }
 }

@@ -26,6 +26,10 @@ namespace LaviOhanaProjectGuitarApp.Helpers
         public const string KEY_SONG_NAME = "Name";
         public const string KEY_PERFORMER = "Performer";
         public const string KEY_IMAGE_TAB = "ImageTab";
+        
+        public const int REQUEST_OPEN_CAMERA = 1;
+        public const string KEY_CAMERA_IMAGE = "data";
+        public const string KEY_UPLOAD_IMAGE = "Udata";
 
 
         public static byte[] BitmapToByteArray(Bitmap bitmap) // מקבל תמונה וממיר אותה לביטים

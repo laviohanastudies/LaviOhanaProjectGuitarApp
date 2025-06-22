@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2C2F3A"
+    android:padding="16dp"
+    android:gravity="top|center_horizontal">
 
-    <TextView
-        android:text="Song Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
+	<TextView
         android:id="@+id/tvSongName"
-    />
-
-    <TextView
-        android:text="Song Performer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:text="Song Name"
+        android:textSize="35sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+	<TextView
         android:id="@+id/tvSongPerformer"
-    />
-
-    <TextView
-        android:text="Song Level"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:id="@+id/tvSongLevel"
-    />
+        android:text="Song Performer"
+        android:textSize="20sp"
+        android:textColor="#CCCCCC"
+        android:gravity="center"
+        android:layout_marginBottom="12dp" />
 
-    /// תמונה
+	<TextView
+        android:id="@+id/tvSongLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Song Level"
+        android:textSize="20sp"
+        android:textColor="#CCCCCC"
+        android:gravity="center"
+        android:layout_marginBottom="20dp" />
+
+	<ImageView
+        android:id="@+id/ivSongImageTab"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="8dp"
+        android:background="#444444"
+        android:contentDescription="Song image" />
 </LinearLayout>

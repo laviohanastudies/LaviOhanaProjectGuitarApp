@@ -62,18 +62,18 @@
   <ItemGroup>
     <Compile Include="Activities\OptionsActivity.cs" />
     <Compile Include="Activities\ProfileActivity.cs" />
+    <Compile Include="Activities\SearchSongActivity.cs" />
     <Compile Include="Activities\SongListActivity.cs" />
     <Compile Include="Activities\SongProfileActivity.cs" />
     <Compile Include="Activities\UploadSongActivity.cs" />
-    <Compile Include="Activities\UserListActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\RegisterActivity.cs" />
     <Compile Include="Helpers\SongAdapter.cs" />
     <Compile Include="Helpers\UserAdapter.cs" />
     <Compile Include="Helpers\General.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Model\RegisterUser.cs" />
     <Compile Include="Model\Song.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,16 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\RegisterLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\UserListRowLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\UserListLayout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

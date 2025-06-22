@@ -18,6 +18,7 @@ namespace LaviOhanaProjectGuitarApp.Helpers
 
         Context context;
         private List<Song> songList;
+        private int activityNumber;
 
         public SongAdapter(Context context)
         {
@@ -25,10 +26,11 @@ namespace LaviOhanaProjectGuitarApp.Helpers
         }
 
 
-        public SongAdapter(Context context, List<Song> SongList)
+        public SongAdapter(Context context, List<Song> SongList, int activityNumber)
         {
             this.songList = SongList;
             this.context = context;
+            this.activityNumber = activityNumber;
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -44,7 +46,14 @@ namespace LaviOhanaProjectGuitarApp.Helpers
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             LayoutInflater LayoutInflater;
-            LayoutInflater = ((SongListActivity)context).LayoutInflater;
+            if (activityNumber==1)
+            {
+                LayoutInflater = ((SongListActivity)context).LayoutInflater;
+            }
+            else
+            {
+                LayoutInflater = ((SearchSongActivity)context).LayoutInflater;
+            }
             View view = LayoutInflater.Inflate(Resource.Layout.SongListRowLayout, parent, false);
 
             TextView tvSongListRowName = view.FindViewById<TextView>(Resource.Id.tvSongListRowName);

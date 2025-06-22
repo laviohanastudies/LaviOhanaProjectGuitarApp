@@ -2,50 +2,128 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:gravity="top|center_horizontal"
+    android:background="#2C2F3A">
 
     <TextView
         android:text="Upload Song"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-    />
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+		android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp" />
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/etUploadSongName"
         android:hint="Song Name"
-       />
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="6dp" />
+
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/etUploadSongPerformer"
         android:hint="Song Performer"
-       />
-    
-    <EditText
-        android:layout_width="200dp"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="6dp" />
+
+
+	<TextView
+        android:text="Level:"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etUploadSongLevel"
-        android:hint="Song Level"
-       />
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp" />
+	
+	<RadioGroup
+            android:id="@+id/rgUploadSongLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/rBtnUploadSongLevelBeginner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Beginner"
+                android:textColor="#FFFFFF"
+                android:buttonTint="#00BCD4" />
+
+            <RadioButton
+                android:id="@+id/rBtnUploadSongLevelMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Medium"
+                android:textColor="#FFFFFF"
+                android:buttonTint="#00BCD4" />
+
+            <RadioButton
+                android:id="@+id/rBtnUploadSongLevelAdvanced"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Advanced"
+                android:textColor="#FFFFFF"
+                android:buttonTint="#00BCD4" />
+
+    </RadioGroup>
+
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="120dp"
+        android:id="@+id/ivUploadSongImageTab"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="4dp"
+        android:background="#444444" />
+
     <Button
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnUploadSongImageTab"
+        android:id="@+id/btnUploadImageFromGallery"
         android:text="Add Image"
-       />
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp" />
+
+	<Button
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnUploadImageFromCamera"
+        android:text="Add Image"
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp" />
+
     <Button
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnUploadSong"
         android:text="Upload"
-       />
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ivUploadSongImageTab"
-       />
-
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

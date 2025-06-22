@@ -20,11 +20,10 @@ namespace LaviOhanaProjectGuitarApp.Activities
     [Activity(Label = "RegisterActivity")]
     public class RegisterActivity : Activity
     {
-        EditText etRegisterEmail, etRegisterPass, etRegisterUsername, etRegisterLevel;
-        TextView tvRegisterDisplay;
+        EditText etRegisterEmail, etRegisterPassword, etRegisterUsername;
         Button RegisterBtn;
         FireBaseData fbd;
-        RegisterUser user;
+        User user;
         HashMap userMap;
         string uid;
         public static string id;
@@ -36,51 +35,48 @@ namespace LaviOhanaProjectGuitarApp.Activities
             Title = string.Empty;
             SetContentView(Resource.Layout.RegisterLayout);
             InitObject();
-            // Create your application here
             InitViews();
         }
 
         private void InitObject()
         {
             fbd = new FireBaseData();
-            user = new RegisterUser();
+            user = new User();
         }
 
         private void InitViews()
         {
             etRegisterUsername = FindViewById<EditText>(Resource.Id.etRegisterUsername);
             etRegisterEmail = FindViewById<EditText>(Resource.Id.etRegisterEmail);
-            etRegisterPass = FindViewById<EditText>(Resource.Id.etRegisterPass);
-            etRegisterLevel = FindViewById<EditText>(Resource.Id.etRegisterLevel);
-            tvRegisterDisplay = FindViewById<TextView>(Resource.Id.tvRegisterDisplay);
+            etRegisterPassword = FindViewById<EditText>(Resource.Id.etRegisterPassword);
             RegisterBtn = FindViewById<Button>(Resource.Id.RegisterBtn);
             RegisterBtn.Click += RegisterBtn_Click;
         }
 
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
-            if(0==0) // CheckInput בדיקת קלט
+            if(etRegisterUsername.Text!=string.Empty && etRegisterEmail.Text!= string.Empty && etRegisterPassword.Text!= string.Empty)
             {
-                SaveImageAndDocument();
+                SaveDocument();
             }
-        }
-
-        private void SaveImageAndDocument()
-        {
-            SaveDocument();
+            else
+            {
+                Toast.MakeText(this, "Enter All Details", ToastLength.Short).Show();
+            }
         }
 
         private async void SaveDocument()
         {
-            if(await Register(etRegisterUsername, etRegisterEmail, etRegisterPass, etRegisterLevel))
+            
+            if(await Register(etRegisterUsername, etRegisterEmail, etRegisterPassword))
             {
                 Toast.MakeText(this, "Registered Successfully", ToastLength.Short).Show();
                 etRegisterUsername.Text = string.Empty;
                 etRegisterEmail.Text = string.Empty;
-                etRegisterPass.Text = string.Empty;
-                etRegisterLevel.Text = string.Empty;
+                etRegisterPassword.Text = string.Empty;
                 Intent intent = new Intent(this, typeof(OptionsActivity));
                 intent.PutExtra("uid", uid);
+                intent.PutExtra("username", user.Username); //
                 StartActivity(intent);
             }
             else
@@ -89,7 +85,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
             }
         }
 
-        private async Task<bool> Register(EditText etRegisterUsername, EditText etRegisterEmail, EditText etRegisterPass, EditText etRegisterLevel)
+        private async Task<bool> Register(EditText etRegisterUsername, EditText etRegisterEmail, EditText etRegisterPass)
         {
             try
             {
@@ -100,7 +96,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
                 userMap.Put(General.KEY_USERNAME, etRegisterUsername.Text);
                 userMap.Put(General.KEY_EMAIL, etRegisterEmail.Text);
                 userMap.Put(General.KEY_PASSWORD, etRegisterPass.Text);
-                userMap.Put(General.KEY_LEVEL, etRegisterLevel.Text);
+                //userMap.Put(General.KEY_LEVEL, etRegisterLevel.Text);
                 DocumentReference userReference = fbd.firestore.Collection(General.FS_UsersCollection).Document(uid);
                 await userReference.Set(userMap);
             }

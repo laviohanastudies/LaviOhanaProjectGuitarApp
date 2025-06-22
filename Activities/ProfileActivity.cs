@@ -4,6 +4,7 @@ using Android.Gms.Extensions;
 using Android.Gms.Tasks;
 using Android.OS;
 using Android.Runtime;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
 using Firebase.Firestore;
@@ -21,17 +22,20 @@ namespace LaviOhanaProjectGuitarApp.Activities
     [Activity(Label = "ProfileActivity")]
     public class ProfileActivity : Activity, IOnSuccessListener
     {
-        EditText etProfileEmail, etProfileUsername, etProfilePassword, etProfileLevel;
-        Button profileUpdateBtn;
+        EditText etProfileEmail, etProfileUsername, etProfilePassword;
+        Button profileUpdateBtn, btnTogglePassword;
         FireBaseData fbd;
         string uid;
-        RegisterUser user;
+        User user;
+        bool isPasswordVisible = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ProfileLayout);
+
             uid = Intent.GetStringExtra("uid");
+
             InitObject();
             InitViews();
             GetProfile();
@@ -47,31 +51,80 @@ namespace LaviOhanaProjectGuitarApp.Activities
             etProfileUsername = FindViewById<EditText>(Resource.Id.etProfileUsername);
             etProfileEmail = FindViewById<EditText>(Resource.Id.etProfileEmail);
             etProfilePassword = FindViewById<EditText>(Resource.Id.etProfilePassword);
-            etProfileLevel = FindViewById<EditText>(Resource.Id.etProfileLevel);
+
             profileUpdateBtn = FindViewById<Button>(Resource.Id.UpdateProfileBtn);
-            //ProfileUpdateButton.Click += ProfileUpdateButton_ClickAsync;
+            btnTogglePassword = FindViewById<Button>(Resource.Id.btnTogglePassword);
+
+            profileUpdateBtn.Click += ProfileUpdateButton_ClickAsync;
+            btnTogglePassword.Click += BtnTogglePassword_Click;
         }
+
+        private void BtnTogglePassword_Click(object sender, EventArgs e)
+        {
+            if (isPasswordVisible)
+            {
+                etProfilePassword.InputType = Android.Text.InputTypes.ClassText | Android.Text.InputTypes.TextVariationPassword;
+                btnTogglePassword.Text = "Show";
+                isPasswordVisible = false;
+            }
+            else
+            {
+                etProfilePassword.InputType = Android.Text.InputTypes.ClassText | Android.Text.InputTypes.TextVariationVisiblePassword;
+                btnTogglePassword.Text = "Hide";
+                isPasswordVisible = true;
+            }
+        }
+
 
         private async void ProfileUpdateButton_ClickAsync(object sender, EventArgs e)
         {
-            if(await UpdateUsername(etProfileUsername.Text))
+            if (await UpdateUsername(etProfileUsername.Text) && await UpdateEmail(etProfileEmail.Text) && await UpdatePassword(etProfilePassword.Text))
             {
                 Toast.MakeText(this, "Updated", ToastLength.Short).Show();
             }
             else
             {
-                Toast.MakeText(this, "Faild", ToastLength.Short).Show();
+                Toast.MakeText(this, "Failed", ToastLength.Short).Show();
             }
         }
 
-        private async Task<bool> UpdateUsername(string UserName)
+        private async Task<bool> UpdateUsername(string Username)
         {
             try
             {
                 DocumentReference UserReference = fbd.firestore.Collection(General.FS_UsersCollection).Document(uid);
-                await UserReference.Update(General.KEY_USERNAME, UserName);
+                await UserReference.Update(General.KEY_USERNAME, Username);
             }
-            catch { return false; }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        private async Task<bool> UpdateEmail(string Email)
+        {
+            try
+            {
+                DocumentReference UserReference = fbd.firestore.Collection(General.FS_UsersCollection).Document(uid);
+                await UserReference.Update(General.KEY_EMAIL, Email);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
+        }
+        private async Task<bool> UpdatePassword(string Password)
+        {
+            try
+            {
+                DocumentReference UserReference = fbd.firestore.Collection(General.FS_UsersCollection).Document(uid);
+                await UserReference.Update(General.KEY_PASSWORD, Password);
+            }
+            catch
+            {
+                return false;
+            }
             return true;
         }
 
@@ -82,19 +135,17 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
         public void OnSuccess(Java.Lang.Object result)
         {
-            
-            //public RegisterUser(string Id, string Username, string Mail, string Password, string Level)
             var snapshot = (DocumentSnapshot)result;
-            user = new RegisterUser(snapshot.Id, snapshot.Get("Username").ToString(), snapshot.Get("Email").ToString(), snapshot.Get("Password").ToString(), snapshot.Get("Level").ToString());
+            user = new User(snapshot.Id, snapshot.Get("Username").ToString(), snapshot.Get("Email").ToString(), snapshot.Get("Password").ToString());
             PrintUser(user);
         }
 
-        private void PrintUser(RegisterUser user)
+
+        private void PrintUser(User user)
         {
-            etProfileUsername.Text = user.Userame;
+            etProfileUsername.Text = user.Username;
             etProfileEmail.Text = user.Email;
             etProfilePassword.Text = user.Password;
-            etProfileLevel.Text = user.Level;
         }
     }
 }

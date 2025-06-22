@@ -1,36 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Options Menu"
-    />
-
-    <Button
-        android:text="Srearch Song"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptionsSearch" />
-    <Button
-        android:text="Upload Song"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptionsUploadSong" />
-    <Button
-        android:text="Song List"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptionsSongList" />
-    <Button
-        android:text="Profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnOptionsProfile" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:gravity="top|center_horizontal"
+        android:background="#2C2F3A">
 
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome "
+            android:id="@+id/tvWelcome"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Options Menu"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="32dp" />
+
+        <Button
+            android:id="@+id/btnOptionsSearch"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Search Song"
+            android:textSize="18sp"
+            android:backgroundTint="#00BCD4"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnOptionsSongList"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Song List"
+            android:textSize="18sp"
+            android:backgroundTint="#00BCD4"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnOptionsUploadSong"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Upload Song"
+            android:textSize="18sp"
+            android:backgroundTint="#00BCD4"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnOptionsProfile"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="18sp"
+            android:backgroundTint="#00BCD4"
+            android:textColor="#FFFFFF" />
+
+    
+
+    </LinearLayout>

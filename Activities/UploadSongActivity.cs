@@ -22,9 +22,15 @@ namespace LaviOhanaProjectGuitarApp.Activities
     [Activity(Label = "UploadSong_Activity")]
     public class UploadSongActivity : Activity ,Android.Views.View.IOnClickListener
     {
-        EditText etUploadSongName, etUploadSongPerformer, etUploadSongLevel;
+        EditText etUploadSongName, etUploadSongPerformer;
+        string uploadSongLevel;
+
+        RadioButton rBtnUploadSongLevelBeginner, rBtnUploadSongLevelMedium, rBtnUploadSongLevelAdvanced;
+        RadioGroup rgUploadSongLevel;
+
         ImageView ivUploadSongImageTab;
-        Button btnUploadSongImageTab, btnUploadSong;
+        Button btnUploadImageFromGallery, btnUploadImageFromCamera, btnUploadSong;
+
         FireBaseData fbd;
         Song song;
         HashMap songMap;
@@ -50,14 +56,23 @@ namespace LaviOhanaProjectGuitarApp.Activities
         {
             etUploadSongName = FindViewById<EditText>(Resource.Id.etUploadSongName);
             etUploadSongPerformer = FindViewById<EditText>(Resource.Id.etUploadSongPerformer);
-            etUploadSongLevel = FindViewById<EditText>(Resource.Id.etUploadSongLevel);
+
+            rgUploadSongLevel = FindViewById<RadioGroup>(Resource.Id.rgUploadSongLevel);
+            rBtnUploadSongLevelBeginner = FindViewById<RadioButton>(Resource.Id.rBtnUploadSongLevelBeginner);
+            rBtnUploadSongLevelMedium = FindViewById<RadioButton>(Resource.Id.rBtnUploadSongLevelMedium);
+            rBtnUploadSongLevelAdvanced = FindViewById<RadioButton>(Resource.Id.rBtnUploadSongLevelAdvanced);
+
             ivUploadSongImageTab = FindViewById<ImageView>(Resource.Id.ivUploadSongImageTab);
-            btnUploadSongImageTab = FindViewById<Button>(Resource.Id.btnUploadSongImageTab);
+            btnUploadImageFromGallery = FindViewById<Button>(Resource.Id.btnUploadImageFromGallery);
+            btnUploadImageFromCamera = FindViewById<Button>(Resource.Id.btnUploadImageFromCamera);
             btnUploadSong = FindViewById<Button>(Resource.Id.btnUploadSong);
-            btnUploadSongImageTab.SetOnClickListener(this);
+
+            btnUploadImageFromGallery.SetOnClickListener(this);
+            btnUploadImageFromCamera.SetOnClickListener(this);
             btnUploadSong.SetOnClickListener(this);
             //btnUploadSongImageTab.Click += btnUploadSongImageTab_Click;
             //btnUploadSong.Click += btnUploadSong_Click;
+
         }
 
         private void btnUploadSongImageTab_Click(object sender, EventArgs e)
@@ -69,7 +84,16 @@ namespace LaviOhanaProjectGuitarApp.Activities
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-            if (requestCode == 0)
+            if (requestCode == General.REQUEST_OPEN_CAMERA) // מצלמה
+            {
+                if (resultCode == Result.Ok)
+                {
+                    bitmap = (Android.Graphics.Bitmap)data.Extras.Get(General.KEY_CAMERA_IMAGE);
+                    ivUploadSongImageTab.SetImageBitmap(bitmap);
+                    image = General.ConvertImageToBase64(bitmap);
+                }
+            }
+            else if(requestCode == 0) // גלריה
             {
                 if (resultCode == Result.Ok)
                 {
@@ -83,7 +107,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
         private void btnUploadSong_Click(object sender, EventArgs e)
         {
-            if (0 == 0) // CheckInput בדיקת קלט
+            if (etUploadSongName.Text!=string.Empty && etUploadSongPerformer.Text!= string.Empty && uploadSongLevel!=string.Empty) // להוסיף לתמונה בדיקת קלט
             {
                 SaveImageAndDocument();
             }
@@ -96,12 +120,26 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
         private async void SaveDocument()
         {
-            if (await UploadSong(etUploadSongName, etUploadSongPerformer, etUploadSongLevel))
+            if (rBtnUploadSongLevelBeginner.Checked)
+            {
+                uploadSongLevel = rBtnUploadSongLevelBeginner.Text;
+            }
+            else if (rBtnUploadSongLevelMedium.Checked)
+            {
+                uploadSongLevel = rBtnUploadSongLevelMedium.Text;
+            }
+            else
+            {
+                uploadSongLevel = rBtnUploadSongLevelAdvanced.Text;
+            }
+
+
+            if (await UploadSong(etUploadSongName, etUploadSongPerformer, uploadSongLevel, image))
             {
                 Toast.MakeText(this, "Uploaded Song Successfully", ToastLength.Short).Show();
                 etUploadSongName.Text = string.Empty;
                 etUploadSongPerformer.Text = string.Empty;
-                etUploadSongLevel.Text = string.Empty;
+                rgUploadSongLevel.ClearCheck();
             }
             else
             {
@@ -109,7 +147,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
             }
         }
 
-        private async Task<bool> UploadSong(EditText etUploadSongName, EditText etUploadSongPerformer, EditText etUploadSongLevel)
+        private async Task<bool> UploadSong(EditText etUploadSongName, EditText etUploadSongPerformer, string uploadSongLevel, string image)
         {
             try
             {
@@ -118,7 +156,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
                 songMap.Put(General.KEY_ID, song_id);
                 songMap.Put(General.KEY_SONG_NAME, etUploadSongName.Text);
                 songMap.Put(General.KEY_PERFORMER, etUploadSongPerformer.Text);
-                songMap.Put(General.KEY_LEVEL, etUploadSongLevel.Text);
+                songMap.Put(General.KEY_LEVEL, uploadSongLevel);
                 songMap.Put(General.KEY_IMAGE_TAB, image);
                 DocumentReference songReference = fbd.firestore.Collection(General.FS_SONG_COLLECTION).Document(song_id);
                 await songReference.Set(songMap);
@@ -132,14 +170,18 @@ namespace LaviOhanaProjectGuitarApp.Activities
 
         public void OnClick(View v)
         {
-            if(v==btnUploadSongImageTab)
+            if(v== btnUploadImageFromGallery)
             {
                 Intent = new Intent(Intent.ActionPick, MediaStore.Images.Media.InternalContentUri);
                 Intent.SetType("image/*");
                 StartActivityForResult(Intent.CreateChooser(Intent, "SelectPicture"), 0);
-                SaveDocument();
             }
-            if(v==btnUploadSong)
+            if(v== btnUploadImageFromCamera)
+            {
+                Intent intent = new Intent(Android.Provider.MediaStore.ActionImageCapture);
+                StartActivityForResult(intent, General.REQUEST_OPEN_CAMERA);
+            }
+            if(v== btnUploadSong)
             {
                 SaveDocument();
             }

@@ -11,29 +11,25 @@ using System.Text;
 
 namespace LaviOhanaProjectGuitarApp.Model
 {
-    internal class RegisterUser
+    internal class User
     {
-        public string Id {  get; set; }
-        public string Userame { get; set; }
+        public string Id { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Level { get; set; }
-        public RegisterUser()
+        public User()
         {
             this.Id = string.Empty;
-            this.Userame = string.Empty;
+            this.Username = string.Empty;
             this.Email = string.Empty;
             this.Password = string.Empty;
-            this.Level = string.Empty;
         }
-        public RegisterUser(string Id, string Username, string Mail, string Password, string Level)
+        public User(string Id, string Username, string Email, string Password)
         {
             this.Id = Id;
-            this.Userame = Username;
-            this.Email = Mail;
+            this.Username = Username;
+            this.Email = Email;
             this.Password = Password;
-            this.Level = Level;
         }
-
     }
 }

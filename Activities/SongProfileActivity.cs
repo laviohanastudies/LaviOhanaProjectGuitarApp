@@ -11,6 +11,7 @@ using LaviOhanaProjectGuitarApp.Helpers;
 using LaviOhanaProjectGuitarApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,12 @@ namespace LaviOhanaProjectGuitarApp.Activities
     public class SongProfileActivity : Activity, IOnSuccessListener
     {
         TextView tvSongName, tvSongPerformer, tvSongLevel;
+        ImageView ivSongImageTab;
         FireBaseData fbd;
         string sid;
         Song song;
         Android.Content.ISharedPreferences sp;
+        Android.Graphics.Bitmap bitmap = null;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -47,7 +50,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
             tvSongName = FindViewById<TextView>(Resource.Id.tvSongName);
             tvSongPerformer = FindViewById<TextView>(Resource.Id.tvSongPerformer);
             tvSongLevel = FindViewById<TextView>(Resource.Id.tvSongLevel);
-            
+            ivSongImageTab = FindViewById<ImageView>(Resource.Id.ivSongImageTab);
         }
 
         //private async void ProfileUpdateButton_ClickAsync(object sender, EventArgs e)
@@ -87,7 +90,7 @@ namespace LaviOhanaProjectGuitarApp.Activities
         public void OnSuccess(Java.Lang.Object result)
         {
             var snapshot = (DocumentSnapshot)result;
-            song = new Song(snapshot.Id, snapshot.Get("Name").ToString(), snapshot.Get("Performer").ToString(), snapshot.Get("Level").ToString());
+            song = new Song(snapshot.Id, snapshot.Get("Name").ToString(), "By " + snapshot.Get("Performer").ToString(), "Level: " + snapshot.Get("Level").ToString(), snapshot.Get("ImageTab").ToString());
             PrintSong(song);
         }
 
@@ -96,6 +99,8 @@ namespace LaviOhanaProjectGuitarApp.Activities
             tvSongName.Text = song.Name;
             tvSongPerformer.Text = song.Performer;
             tvSongLevel.Text = song.Level;
+            bitmap = General.ConvertBase64ToImage(song.ImageTab);
+            ivSongImageTab.SetImageBitmap(bitmap);
         }
     }
 }

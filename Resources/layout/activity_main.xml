@@ -3,29 +3,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="16dp"
     android:orientation="vertical"
-    android:background="@android:color/holo_green_dark"
-   >
+    android:gravity="top|center_horizontal"
+    android:background="#2C2F3A">
 
-    <TextView
+	<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Main Activity"
-    />
+        android:text="Welcome to my guitar app!"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"/>
 
-    <Button
+	<Button
+        android:id="@+id/LoginButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:text="Login"
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"/>
+
+	<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/LoginButton" />
-    <Button
+        android:text="Don't have an account?"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="32dp"/>
+
+	<Button
+        android:id="@+id/RegisterButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:text="Register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/RegisterButton" />
-
-
-
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
 </LinearLayout>

@@ -1,7 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2C2F3A"
+    android:padding="16dp"
+    android:gravity="top|center_horizontal">
 
+	<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Song"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp" />
+
+	<RadioGroup
+        android:id="@+id/rgSearchOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+		<RadioButton
+            android:id="@+id/rBtnSearchByName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="By Name"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4" />
+
+		<RadioButton
+            android:id="@+id/rBtnSearchByPerformer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="By Performer"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4" />
+
+		<RadioButton
+            android:id="@+id/rBtnSearchByLevel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="By Level"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4" />
+	</RadioGroup>
+
+	<EditText
+        android:id="@+id/etSearchSong"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:hint="Search"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp" />
+
+	<!-- RadioButtons for level options -->
+	<RadioGroup
+        android:id="@+id/rgLevelOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone">
+
+		<RadioButton
+            android:id="@+id/rBtnLevelBeginner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beginner"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4"
+            android:layout_marginEnd="8dp"/>
+
+		<RadioButton
+            android:id="@+id/rBtnLevelMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4"
+            android:layout_marginEnd="8dp"/>
+
+		<RadioButton
+            android:id="@+id/rBtnLevelAdvanced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advanced"
+            android:textColor="#FFFFFF"
+            android:buttonTint="#00BCD4" />
+	</RadioGroup>
+
+	<Button
+        android:id="@+id/btnEnterSearch"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp" />
+
+	<ListView
+        android:id="@+id/lvSearchSongList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
+        android:background="#333333" />
 </LinearLayout>

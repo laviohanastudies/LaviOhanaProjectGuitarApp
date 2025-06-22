@@ -3,57 +3,63 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="16dp"
     android:orientation="vertical"
-    android:background="@android:color/holo_green_dark"
-   >
-
+    android:gravity="top|center_horizontal"
+    android:background="#2C2F3A">
 
     <TextView
-        android:text="Register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-    />
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="24dp" />
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/etRegisterUsername"
         android:hint="Username"
-       />
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"/>
+
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/etRegisterEmail"
-        android:hint="mail"
-       />
+        android:hint="Email"
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"/>
+
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etRegisterPass"
+        android:id="@+id/etRegisterPassword"
         android:hint="Password"
-       />
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/etRegisterLevel"
-        android:hint="Beginner / medium / advanced"
-       />
+        android:background="#333333"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#CCCCCC"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"/>
+
     <Button
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:id="@+id/RegisterBtn"
-        android:text="Enter"
-       />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text = "welcome:"
-        android:id="@+id/tvRegisterDisplay"
-       />
-
-
-
+        android:text="REGISTER"
+        android:textSize="18sp"
+        android:backgroundTint="#00BCD4"
+        android:textColor="#FFFFFF"/>
 </LinearLayout>

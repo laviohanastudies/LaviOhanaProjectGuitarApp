@@ -74,5 +74,11 @@ namespace LaviOhanaProjectGuitarApp.Helpers
         {
             return firestore.Collection(cName).Document(id).Get();
         }
+        
+        public Android.Gms.Tasks.Task GetEqualCollection(string fName, string value)
+        {
+
+            return firestore.Collection(General.FS_SONG_COLLECTION).WhereEqualTo(fName, value).Get();
+        }
     }
 }

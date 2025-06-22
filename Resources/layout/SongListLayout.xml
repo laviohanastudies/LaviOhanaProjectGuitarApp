@@ -2,21 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#2C2F3A"
+    android:padding="16dp"
+    android:gravity="top|center_horizontal">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="wrap_content"
         android:text="Song List"
-        android:textSize="80px"
-        android:textColor="@android:color/holo_green_dark"
+        android:textSize="28sp"
+        android:textColor="#FFFFFF"
         android:gravity="center"
-        android:textFontWeight="1500"
-    />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:textStyle="bold" />
+
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/lvSongList"
-    />
-         
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
+        android:background="#333333"/>
 </LinearLayout>
+
+
